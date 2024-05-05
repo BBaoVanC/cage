@@ -226,6 +226,7 @@ usage(FILE *file, const char *cage)
 	fprintf(file,
 		"Usage: %s [OPTIONS] [--] [APPLICATION...]\n"
 		"\n"
+		" -c\t Hide cursor\n"
 		" -d\t Don't draw client side decorations, when possible\n"
 		" -D\t Enable debug logging\n"
 		" -h\t Display this help message\n"
@@ -242,8 +243,11 @@ static bool
 parse_args(struct cg_server *server, int argc, char *argv[])
 {
 	int c;
-	while ((c = getopt(argc, argv, "dhm:sv")) != -1) {
+	while ((c = getopt(argc, argv, "cdhm:sv")) != -1) {
 		switch (c) {
+		case 'c':
+			server->hide_cursor = true;
+			break;
 		case 'd':
 			server->xdg_decoration = true;
 			break;
